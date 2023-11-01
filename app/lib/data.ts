@@ -19,14 +19,14 @@ export async function fetchRevenue() {
     // Artificially delay a reponse for demo purposes.
     // Don't do this in real life :)
 
-    // console.log('Fetching revenue data...');
+    console.log('Fetching revenue data...');
     await new Promise((resolve, reject) => {
-      setTimeout(resolve, 3000);
+      setTimeout(resolve, 2000);
     });
 
     const data = await sql<Revenue>`SELECT * FROM revenue`;
 
-    // console.log('Data fetch complete after 3 seconds.');
+    console.log('Data fetch complete after 3 seconds.');
 
     return data.rows;
   } catch (error) {
@@ -59,9 +59,9 @@ export async function fetchLatestInvoices() {
 export async function fetchCardData() {
   noStore();
   try {
-    // You can probably combine these into a single SQL query
-    // However, we are intentionally splitting them to demonstrate
-    // how to initialize multiple queries in parallel with JS.
+    // これらを1つのSQLクエリに組み合わせることはできるでしょう。
+    // しかし、わざと分割しています。これは、
+    // JavaScriptで複数のクエリを並列に初期化する方法を示すためです。
     const invoiceCountPromise = sql`SELECT COUNT(*) FROM invoices`;
     const customerCountPromise = sql`SELECT COUNT(*) FROM customers`;
     const invoiceStatusPromise = sql`SELECT
